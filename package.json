@@ -1,8 +1,8 @@
 {
-  "name": "decentragram",
+  "name": "educentragram",
   "version": "0.1.0",
   "description": "Decentralized Social Media",
-  "author": "Dapp University",
+  "author": "Kramah softwares",
   "homepage": ".",
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.1.0",

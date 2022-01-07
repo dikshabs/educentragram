@@ -1,5 +1,5 @@
-const Decentragram = artifacts.require("Decentragram");
+const Educentragram = artifacts.require("Educentragram");
 
 module.exports = function(deployer) {
-  deployer.deploy(Decentragram);
+  deployer.deploy(Educentragram);
 };

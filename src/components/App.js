@@ -1,4 +1,4 @@
-import Decentragram from '../abis/Decentragram.json'
+import Educentragram from '../abis/Educentragram.json'
 import React, { Component } from 'react';
 import Identicon from 'identicon.js';
 import Navbar from './Navbar'
@@ -37,15 +37,15 @@ class App extends Component {
     this.setState({ account: accounts[0] })
     // Network ID
     const networkId = await web3.eth.net.getId()
-    const networkData = Decentragram.networks[networkId]
+    const networkData = Educentragram.networks[networkId]
     if(networkData) {
-      const decentragram = new web3.eth.Contract(Decentragram.abi, networkData.address)
-      this.setState({ decentragram })
-      const imagesCount = await decentragram.methods.imageCount().call()
+      const educentragram = new web3.eth.Contract(Educentragram.abi, networkData.address)
+      this.setState({ educentragram })
+      const imagesCount = await educentragram.methods.imageCount().call()
       this.setState({ imagesCount })
       // Load images
       for (var i = 1; i <= imagesCount; i++) {
-        const image = await decentragram.methods.images(i).call()
+        const image = await educentragram.methods.images(i).call()
         this.setState({
           images: [...this.state.images, image]
         })
@@ -56,7 +56,7 @@ class App extends Component {
       })
       this.setState({ loading: false})
     } else {
-      window.alert('Decentragram contract not deployed to detected network.')
+      window.alert('educentragram contract not deployed to detected network.')
     }
   }
 
@@ -85,7 +85,7 @@ class App extends Component {
       }
 
       this.setState({ loading: true })
-      this.state.decentragram.methods.uploadImage(result[0].hash, description).send({ from: this.state.account }).on('transactionHash', (hash) => {
+      this.state.educentragram.methods.uploadImage(result[0].hash, description).send({ from: this.state.account }).on('transactionHash', (hash) => {
         this.setState({ loading: false })
       })
     })
@@ -93,7 +93,7 @@ class App extends Component {
 
   tipImageOwner(id, tipAmount) {
     this.setState({ loading: true })
-    this.state.decentragram.methods.tipImageOwner(id).send({ from: this.state.account, value: tipAmount }).on('transactionHash', (hash) => {
+    this.state.educentragram.methods.tipImageOwner(id).send({ from: this.state.account, value: tipAmount }).on('transactionHash', (hash) => {
       this.setState({ loading: false })
     })
   }
@@ -102,7 +102,7 @@ class App extends Component {
     super(props)
     this.state = {
       account: '',
-      decentragram: null,
+      educentragram: null,
       images: [],
       loading: true
     }
